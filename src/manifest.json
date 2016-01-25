@@ -1,0 +1,29 @@
+{
+  "name": "GetLinks",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "storage"
+  ],
+  "omnibox": {
+    "keyword": "get"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "get link yo",
+    "default_popup": "popup.html"
+  }
+}
