@@ -1,0 +1,13 @@
+// TYPOGRAPHY
+html {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+// BUTTONS
+button {
+  &.icon-btn {
+    background: none;
+    border: none;
+    outline: none;
+  }
+}

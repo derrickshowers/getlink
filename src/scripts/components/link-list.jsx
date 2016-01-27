@@ -61,7 +61,7 @@ export default class LinkList extends React.Component {
         <ul>
           {linkItems}
         </ul>
-        <button onClick={this.addNewRow}>Add New</button>
+        <button className="add-new icon-btn" onClick={this.addNewRow}><svg className="icon icon-plus"><use xlinkHref="#icon-plus"></use></svg></button>
       </div>
     );
   }

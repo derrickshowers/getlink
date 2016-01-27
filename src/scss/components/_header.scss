@@ -1,0 +1,30 @@
+header {
+  position: fixed;
+  height: 50px;
+  width: 100%;
+  background: linear-gradient($titleBarGray, $titleBarGrayLight);
+  border-bottom: 1px solid $titleBarGrayMedium;
+  padding: 0 2%;
+
+  h1 {
+    line-height: 50px;
+    color: $titleBarGrayDark;
+    font-weight: 200;
+  }
+}
+
+.add-new {
+  position: absolute;
+  top: 16px;
+  right: 2%;
+  .icon {
+    width: 15px;
+    height: 15px;
+    fill: rgba($titleBarGrayDark, 0.8);
+  }
+  &:active {
+    .icon {
+      fill: $titleBarGrayDark;
+    }
+  }
+}
