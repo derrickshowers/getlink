@@ -5,8 +5,9 @@
   "main": "dist/options.html",
   "scripts": {
     "clean": "rm -r ./dist/*",
-    "build:static": "cp -r src/* dist/",
-    "build": "npm run clean; npm run build:static; webpack",
+    "build:css": "node-sass -r ./src/scss -o dist/css",
+    "build:static": "cp src/*.html src/manifest.json dist/; mkdir dist/images; cp -r src/images/* dist/images/",
+    "build": "npm run clean; npm run build:css; npm run build:static; webpack",
     "watch": "watch 'npm run build' ./src"
   },
   "repository": {
@@ -19,8 +20,11 @@
     "babel-core": "^6.4.0",
     "babel-loader": "^6.2.1",
     "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
     "jquery": "^2.2.0",
+    "node-sass": "^3.4.2",
     "parallelshell": "^2.0.0",
+    "react": "^0.14.6",
     "watch": "^0.17.1",
     "webpack": "^1.12.10"
   }

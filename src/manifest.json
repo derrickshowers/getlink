@@ -9,7 +9,8 @@
   },
   "background": {
     "scripts": [
-      "background.js"
+      "scripts/vendor.js",
+      "scripts/background.js"
     ]
   },
   "permissions": [
