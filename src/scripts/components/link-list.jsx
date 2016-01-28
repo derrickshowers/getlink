@@ -26,8 +26,12 @@ export default class LinkList extends React.Component {
   }
   componentDidMount() {
     chrome.storage.sync.get('getLinks', storage => {
-      let data = changeToArray(storage.getLinks);
-      data = sortArrayAlphapetically(data);
+      let data;
+      if (!storage.getLinks) {
+        data = [];
+      } else {
+        data = sortArrayAlphapetically(changeToArray(storage.getLinks));
+      }
       this.setState({ data });
     });
   }
@@ -41,7 +45,11 @@ export default class LinkList extends React.Component {
   }
   saveChanges(oldKeyword, newKeyword, url) {
     chrome.storage.sync.get('getLinks', storage => {
-      delete storage.getLinks[oldKeyword];
+      if (storage.getLinks) {
+        delete storage.getLinks[oldKeyword];
+      } else {
+        storage.getLinks = {};
+      }
       if (newKeyword) {
         storage.getLinks[newKeyword] = url;
       }
