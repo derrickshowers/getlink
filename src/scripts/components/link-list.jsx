@@ -42,7 +42,9 @@ export default class LinkList extends React.Component {
   saveChanges(oldKeyword, newKeyword, url) {
     chrome.storage.sync.get('getLinks', storage => {
       delete storage.getLinks[oldKeyword];
-      storage.getLinks[newKeyword] = url;
+      if (newKeyword) {
+        storage.getLinks[newKeyword] = url;
+      }
       chrome.storage.sync.set({ getLinks: storage.getLinks }, () => {
         let data = changeToArray(storage.getLinks);
         data = sortArrayAlphapetically(data);
@@ -58,8 +60,8 @@ export default class LinkList extends React.Component {
     });
     return (
       <div>
-        <ul>
-          {linkItems}
+        <ul className="grid">
+          <li>{linkItems}</li>
         </ul>
         <button className="add-new icon-btn" onClick={this.addNewRow}><svg className="icon icon-plus"><use xlinkHref="#icon-plus"></use></svg></button>
       </div>

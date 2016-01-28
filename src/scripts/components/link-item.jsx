@@ -11,8 +11,12 @@ export default class LinkItem extends React.Component {
 
     // bind context for event handlers
     this.handleEditSave = this.handleEditSave.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleKeywordChange = this.handleKeywordChange.bind(this);
     this.handleUrlChange = this.handleUrlChange.bind(this);
+  }
+  handleDelete(e) {
+    this.props.saveChanges(this.props.keyword);
   }
   handleEditSave(e) {
     if (this.state.isEditing) {
@@ -29,28 +33,41 @@ export default class LinkItem extends React.Component {
     this.setState({ url: e.target.value });
   }
   render() {
+    let editSaveIcon = (() => {
+      if (this.state.isEditing) {
+        return (
+          <svg className="icon icon-save"><use xlinkHref="#icon-save"></use></svg>
+        );
+      } else {
+        return (
+          <svg className="icon icon-edit"><use xlinkHref="#icon-edit"></use></svg>
+        );
+      }
+    })();
     return (
-      <ul>
-        <li>
+      <ul className={this.state.isEditing ? 'editing row' : 'row'}>
+        <li className="keyword">
+          <span className="get-keyword">get</span>
           {(() => {
             if (this.state.isEditing) {
-              return <input id={`keyword-${this.props.id}`} type="text" onChange={this.handleKeywordChange} defaultValue={this.props.keyword} />
+              return <input id={`keyword-${this.props.id}`} placeholder="keyword" type="text" onChange={this.handleKeywordChange} defaultValue={this.props.keyword} />
             } else {
               return this.props.keyword
             }
           })()}
         </li>
-        <li>
+        <li className="url">
           {(() => {
             if (this.state.isEditing) {
-              return <input id={`url-${this.props.id}`} type="text" onChange={this.handleUrlChange} defaultValue={this.props.url} />
+              return <input id={`url-${this.props.id}`} placeholder="url" type="text" onChange={this.handleUrlChange} defaultValue={this.props.url} />
             } else {
               return this.props.url
             }
           })()}
         </li>
-        <li>
-          <button onClick={this.handleEditSave}>{this.state.isEditing ? 'Save' : 'Edit'}</button>
+        <li className="actions">
+          <button className="edit-save-btn icon-btn" onClick={this.handleEditSave}>{editSaveIcon}</button>
+          <button className="delete-btn icon-btn" onClick={this.handleDelete}><svg className="icon icon-delete"><use xlinkHref="#icon-delete"></use></svg></button>
         </li>
       </ul>
     )
