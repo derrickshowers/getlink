@@ -1,5 +1,8 @@
 import React from 'react';
 import LinkItem from './link-item.jsx';
+import DebugMode from './debug-mode.jsx';
+
+let storageKey = 'getLinks';
 
 function changeToArray(obj) {
   let keys = Object.keys(obj);
@@ -23,17 +26,25 @@ export default class LinkList extends React.Component {
     };
     this.addNewRow = this.addNewRow.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
+    this.changeStorageKey = this.changeStorageKey.bind(this);
   }
   componentDidMount() {
-    chrome.storage.sync.get('getLinks', storage => {
+    this.loadFromStorage();
+  }
+  loadFromStorage() {
+    chrome.storage.sync.get(storageKey, storage => {
       let data;
-      if (!storage.getLinks) {
+      if (!storage[storageKey]) {
         data = [];
       } else {
-        data = sortArrayAlphapetically(changeToArray(storage.getLinks));
+        data = sortArrayAlphapetically(changeToArray(storage[storageKey]));
       }
       this.setState({ data });
     });
+  }
+  changeStorageKey(newStorageKey) {
+    storageKey = newStorageKey;
+    this.loadFromStorage();
   }
   addNewRow() {
     let data = this.state.data;
@@ -44,17 +55,17 @@ export default class LinkList extends React.Component {
     this.setState({ data });
   }
   saveChanges(oldKeyword, newKeyword, url) {
-    chrome.storage.sync.get('getLinks', storage => {
-      if (storage.getLinks) {
-        delete storage.getLinks[oldKeyword];
+    chrome.storage.sync.get(storageKey, storage => {
+      if (storage[storageKey]) {
+        delete storage[storageKey][oldKeyword];
       } else {
-        storage.getLinks = {};
+        storage[storageKey] = {};
       }
       if (newKeyword) {
-        storage.getLinks[newKeyword] = url;
+        storage[storageKey][newKeyword] = url;
       }
-      chrome.storage.sync.set({ getLinks: storage.getLinks }, () => {
-        let data = changeToArray(storage.getLinks);
+      chrome.storage.sync.set({ [storageKey]: storage[storageKey] }, () => {
+        let data = changeToArray(storage[storageKey]);
         data = sortArrayAlphapetically(data);
         this.setState({ data });
       });
@@ -72,6 +83,7 @@ export default class LinkList extends React.Component {
           <li>{linkItems}</li>
         </ul>
         <button className="add-new icon-btn" onClick={this.addNewRow}><svg className="icon icon-plus"><use xlinkHref="#icon-plus"></use></svg></button>
+        <DebugMode changeStorageKey={this.changeStorageKey} />
       </div>
     );
   }

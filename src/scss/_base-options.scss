@@ -66,4 +66,15 @@
       }
     }
   }
+  .toggle-debug-mode {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    outline: none;
+    &.enabled {
+      color: $alertRed;
+    }
+  }
 }
