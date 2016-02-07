@@ -1,8 +1,9 @@
 {
   "name": "GetLinks",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "manifest_version": 2,
-  "description": "",
+  "author": "Derrick Showers",
+  "description": "Quick links to your most commonly visited sites",
   "icons": {
     "16": "images/icon-16.png",
     "128": "images/icon-128.png"
