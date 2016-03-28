@@ -45,31 +45,33 @@ export default class LinkItem extends React.Component {
       }
     })();
     return (
-      <ul className={this.state.isEditing ? 'editing row' : 'row'}>
-        <li className="keyword">
-          <span className="get-keyword">get</span>
-          {(() => {
-            if (this.state.isEditing) {
-              return <input id={`keyword-${this.props.id}`} placeholder="keyword" type="text" onChange={this.handleKeywordChange} defaultValue={this.props.keyword} />
-            } else {
-              return this.props.keyword
-            }
-          })()}
-        </li>
-        <li className="url">
-          {(() => {
-            if (this.state.isEditing) {
-              return <input id={`url-${this.props.id}`} placeholder="url" type="text" onChange={this.handleUrlChange} defaultValue={this.props.url} />
-            } else {
-              return this.props.url
-            }
-          })()}
-        </li>
-        <li className="actions">
-          <button className="edit-save-btn icon-btn" onClick={this.handleEditSave}>{editSaveIcon}</button>
-          <button className="delete-btn icon-btn" onClick={this.handleDelete}><svg className="icon icon-delete"><use xlinkHref="#icon-delete"></use></svg></button>
-        </li>
-      </ul>
+      <form onSubmit={this.handleEditSave}>
+        <ul className={this.state.isEditing ? 'editing row' : 'row'}>
+          <li className="keyword">
+            <span className="get-keyword">get</span>
+            {(() => {
+              if (this.state.isEditing) {
+                return <input id={`keyword-${this.props.id}`} placeholder="keyword" type="text" onChange={this.handleKeywordChange} defaultValue={this.props.keyword} />
+              } else {
+                return this.props.keyword
+              }
+            })()}
+          </li>
+          <li className="url">
+            {(() => {
+              if (this.state.isEditing) {
+                return <input id={`url-${this.props.id}`} placeholder="url" type="text" onChange={this.handleUrlChange} defaultValue={this.props.url} />
+              } else {
+                return this.props.url
+              }
+            })()}
+          </li>
+          <li className="actions">
+            <button className="edit-save-btn icon-btn">{editSaveIcon}</button>
+            <button className="delete-btn icon-btn" onClick={this.handleDelete}><svg className="icon icon-delete"><use xlinkHref="#icon-delete"></use></svg></button>
+          </li>
+        </ul>
+      </form>
     )
   }
 }
