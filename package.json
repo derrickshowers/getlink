@@ -9,13 +9,13 @@
     "build:css": "node-sass -r ./src/scss -o dist/css",
     "build:static": "cp src/*.html src/manifest.json dist/; mkdir dist/images; cp -r src/images/* dist/images/",
     "build": "npm run clean; npm run build:css; npm run build:static; webpack",
-    "watch": "watch 'npm run build' ./src"
+    "watch": "watch 'npm run build' ./src",
+    "test": "karma start"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/derrickshowers/get-links.git"
   },
-  "author": "Derrick SHowers",
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.4.0",
@@ -25,8 +25,20 @@
     "jquery": "^2.2.0",
     "node-sass": "^3.4.2",
     "parallelshell": "^2.0.0",
-    "react": "^0.14.6",
+    "react": "^15.0.1",
     "watch": "^0.17.1",
     "webpack": "^1.12.10"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-mocha": "^0.2.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-webpack": "^1.7.0",
+    "mocha": "*",
+    "phantomjs-prebuilt": "^2.1.7",
+    "react-addons-test-utils": "^15.0.1"
   }
 }
