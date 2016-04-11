@@ -7,3 +7,5 @@ node_js:
 addons:
   code_climate:
     repo_token: 57e61708ab519a51a52a101360419e71d22bed251daeac0825f17c792d90fff6
+after_script:
+  - ./node_modules/codeclimate-test-reporter/bin/codeclimate.js < coverage/lcov.info
